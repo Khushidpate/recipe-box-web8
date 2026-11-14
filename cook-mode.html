@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Cook Mode – The Recipe Box</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%B3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="css/rb-web.css">
+</head>
+<body>
+
+<!-- Shown when the page is opened without a recipe (or with a broken link) -->
+<main id="empty" class="empty" hidden>
+  <h1>Open Cook Mode from a recipe</h1>
+  <p id="emptyMsg">In The Recipe Box, open a recipe and select <strong>Cook mode</strong>. The recipe opens here one step at a time, with timers.</p>
+  <p><a class="btn" id="sampleLink" href="#">Try it with a sample recipe</a></p>
+</main>
+
+<div id="cook" class="cook" hidden>
+  <header class="cook-head">
+    <h1 class="cook-title" id="title"></h1>
+    <div class="servings" role="group" aria-label="Servings">
+      <button class="round" id="less" type="button" aria-label="Fewer servings">−</button>
+      <output id="servings" aria-live="polite"></output>
+      <span id="unit"></span>
+      <button class="round" id="more" type="button" aria-label="More servings">+</button>
+    </div>
+    <label class="wake" id="wakeWrap" hidden>
+      <input type="checkbox" id="wake"> Keep screen on
+    </label>
+  </header>
+
+  <div class="cook-body">
+    <details class="ingredients" id="ingPanel" open>
+      <summary id="ingSummary">Ingredients</summary>
+      <ul id="ingList"></ul>
+      <p class="source" id="source" hidden>Recipe from <a id="sourceLink" rel="noopener noreferrer" target="_blank">its original source</a>.</p>
+    </details>
+
+    <main class="stage">
+      <section id="stepView">
+        <p class="progress-text" id="progressText" aria-live="polite"></p>
+        <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+        <p class="step" id="stepText" tabindex="-1"></p>
+        <p class="step-hint" id="stepHint" hidden>Select the time to start a timer.</p>
+        <div class="nav">
+          <button class="btn btn-quiet" id="prev" type="button">Previous step</button>
+          <button class="btn btn-primary" id="next" type="button">Next step</button>
+        </div>
+        <p class="keys">Keyboard: ← and → move between steps.</p>
+      </section>
+
+      <section id="doneView" class="finished" hidden>
+        <h2 id="doneTitle" tabindex="-1">All steps done.</h2>
+        <p>Timers keep running until you dismiss them. Close this tab to go back to the app.</p>
+        <div class="nav">
+          <button class="btn btn-quiet" id="back" type="button">Back to the last step</button>
+          <button class="btn" id="restart" type="button">Start over</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="tray" id="tray" aria-label="Timers"></div>
+</div>
+
+<div class="sr-only" id="announce" aria-live="assertive"></div>
+
+<script src="js/rb-common.js"></script>
+<script src="js/cook-mode.js"></script>
+</body>
+</html>

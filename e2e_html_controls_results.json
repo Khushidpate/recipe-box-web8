@@ -1,0 +1,92 @@
+[
+ {
+  "id": "H1",
+  "check": "Title with & shows correctly",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "H1",
+  "check": "Ingredients scaled to 4 servings",
+  "pass": true,
+  "detail": "['8 eggs', '1/2 cup grated cheese', '4 tbsp chopped soft herbs', '2 tbsp butter', 'salt and pepper']"
+ },
+ {
+  "id": "H1",
+  "check": "Steps are numbered by the list, 4 of them",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "H1",
+  "check": "Allergen notice shown",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "H1",
+  "check": "Card prints on one Letter page",
+  "pass": true,
+  "detail": "pages=1"
+ },
+ {
+  "id": "H2",
+  "check": "No tags from recipe text become real elements",
+  "pass": true,
+  "detail": "elements=0"
+ },
+ {
+  "id": "H2",
+  "check": "The text is still shown to the reader",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "H2",
+  "check": "A non-https source is not shown",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "H3",
+  "check": "7 days with run totals",
+  "pass": true,
+  "detail": "['2', '3', '2', '3', '0', '4', '2']"
+ },
+ {
+  "id": "H3",
+  "check": "Busiest day (4 runs) is the full 120 px",
+  "pass": true,
+  "detail": "[60, 90, 60, 90, 2, 120, 60]"
+ },
+ {
+  "id": "H3",
+  "check": "Bars scale with the count (2 runs = 60 px)",
+  "pass": true,
+  "detail": "[60, 90, 60, 90, 2, 120, 60]"
+ },
+ {
+  "id": "H3",
+  "check": "Failures shown in red on the day they happened",
+  "pass": true,
+  "detail": "red bars=1"
+ },
+ {
+  "id": "H3",
+  "check": "Day labels run from 7 Nov to 13 Nov",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "H3",
+  "check": "No runs: 7 flat lines, no errors",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "H4",
+  "check": "Card fits a 390 px phone screen",
+  "pass": true,
+  "detail": "scrollWidth=390"
+ }
+]

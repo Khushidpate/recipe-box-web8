@@ -1,0 +1,228 @@
+/* The Recipe Box – Version 8 web pages (Cook Mode, Email a Recipe)
+   Colours are the app's own: screen fill RGBA(255,251,245) / dark RGBA(28,25,23),
+   text RGBA(41,37,36) / RGBA(245,245,244), V5 caramel #a6602b, V6 status colours. */
+
+:root {
+  --paper: #fffbf5;
+  --surface: #ffffff;
+  --ink: #292524;
+  --muted: #6b635c;
+  --line: #e7dfd3;
+  --accent: #a6602b;
+  --accent-ink: #ffffff;
+  --accent-soft: #f6e9dc;
+  --ok: #15803d;
+  --warn: #b45309;
+  --warn-soft: #fdf1e0;
+  --bad: #c62828;
+  --bad-soft: #fdeaea;
+  --focus: #1d4ed8;
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --font: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1c1917; --surface: #262220; --ink: #f5f5f4; --muted: #b5ada6; --line: #3d3733;
+    --accent: #e0a06a; --accent-ink: #1c1917; --accent-soft: #3a2a1d;
+    --ok: #4ade80; --warn: #fbbf24; --warn-soft: #3a2e14; --bad: #f87171; --bad-soft: #3b1d1d;
+    --focus: #93c5fd; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1c1917; --surface: #262220; --ink: #f5f5f4; --muted: #b5ada6; --line: #3d3733;
+  --accent: #e0a06a; --accent-ink: #1c1917; --accent-soft: #3a2a1d;
+  --ok: #4ade80; --warn: #fbbf24; --warn-soft: #3a2e14; --bad: #f87171; --bad-soft: #3b1d1d;
+  --focus: #93c5fd; color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+a { color: var(--accent); }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4em;
+  min-height: 44px; padding: .55em 1.1em;
+  border: 2px solid var(--accent); border-radius: var(--radius-s);
+  background: transparent; color: var(--accent); font-weight: 700; cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary { background: var(--accent); color: var(--accent-ink); }
+.btn, .round, .chip button, .timer-word { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.btn:active:not(:disabled), .round:active:not(:disabled) { filter: brightness(.92); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-quiet { border-color: var(--line); color: var(--ink); }
+
+/* ================= Cook Mode ================= */
+
+.cook { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
+.cook-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem); border-bottom: 1px solid var(--line);
+}
+.cook-title { margin: 0; font-size: clamp(1.25rem, 2.6vw, 1.75rem); line-height: 1.2; flex: 1 1 18rem; }
+.servings { display: inline-flex; align-items: center; gap: .5rem; }
+.servings output { min-width: 2ch; text-align: center; font-weight: 700; font-size: 1.25rem; }
+.round {
+  width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--line);
+  background: var(--surface); font-size: 1.4rem; line-height: 1; cursor: pointer;
+}
+.wake { display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; }
+.wake input { width: 1.25rem; height: 1.25rem; accent-color: var(--accent); }
+
+.cook-body {
+  display: grid; grid-template-columns: minmax(15rem, 22rem) 1fr; gap: 0;
+  align-items: stretch;
+}
+.ingredients { border-right: 1px solid var(--line); padding: 1.25rem clamp(1rem, 3vw, 2rem); }
+.ingredients summary { font-weight: 700; font-size: 1.15rem; cursor: pointer; list-style: none; }
+.ingredients summary::-webkit-details-marker { display: none; }
+.ingredients summary::after { content: "▾"; display: inline-block; margin-left: .5rem; color: var(--accent); transition: transform .2s; }
+.ingredients:not([open]) summary::after { transform: rotate(-90deg); }
+.ingredients ul { list-style: none; margin: 1rem 0 0; padding: 0; }
+.ingredients li label {
+  display: flex; gap: .75rem; align-items: flex-start; padding: .5rem 0; cursor: pointer;
+  border-bottom: 1px dashed var(--line);
+}
+.ingredients input { width: 1.3rem; height: 1.3rem; margin-top: .15rem; flex: none; accent-color: var(--accent); }
+.ingredients input:checked + span { color: var(--muted); text-decoration: line-through; }
+.source { margin-top: 1.25rem; font-size: .9rem; color: var(--muted); }
+
+.stage { display: flex; flex-direction: column; padding: clamp(1.25rem, 4vw, 3rem) clamp(1rem, 5vw, 4rem); min-width: 0; }
+.progress-text { margin: 0 0 .5rem; color: var(--muted); font-weight: 700; }
+.progress { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.progress > span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+
+.step {
+  margin: clamp(1.5rem, 5vh, 3.5rem) 0; max-width: 34ch;
+  font-size: clamp(1.75rem, 3.6vw, 2.9rem); line-height: 1.3; font-weight: 400;
+}
+.step:focus { outline: none; }
+.timer-word {
+  font: inherit; color: var(--accent); background: var(--accent-soft);
+  border: 0; border-bottom: 3px solid var(--accent); border-radius: 4px 4px 0 0;
+  padding: 0 .2em; cursor: pointer; white-space: nowrap;
+}
+.timer-word .clock { font-size: .55em; vertical-align: middle; margin-left: .3em; font-variant-numeric: tabular-nums; font-weight: 700; }
+.timer-word .clock:empty { display: none; }
+.timer-word[data-state="running"] { background: var(--accent); color: var(--accent-ink); }
+.timer-word[data-state="done"] { background: var(--ok); color: #fff; border-color: var(--ok); }
+.step-hint { color: var(--muted); font-size: 1rem; margin: -1rem 0 2rem; }
+
+.nav { display: flex; gap: 1rem; margin-top: auto; flex-wrap: wrap; }
+.nav .btn { min-width: 9rem; min-height: 56px; font-size: 1.1rem; }
+.nav .btn-primary { margin-left: auto; }
+.keys { color: var(--muted); font-size: .9rem; margin-top: 1rem; }
+
+.finished { text-align: left; }
+.finished h2 { font-size: clamp(1.75rem, 3.6vw, 2.6rem); margin: 0 0 1rem; line-height: 1.2; }
+
+.tray {
+  position: sticky; bottom: 0; display: flex; gap: .75rem; flex-wrap: wrap;
+  padding: .75rem clamp(1rem, 4vw, 2.5rem) calc(.75rem + env(safe-area-inset-bottom, 0px));
+  background: var(--surface); border-top: 1px solid var(--line);
+}
+.tray:empty { display: none; }
+.chip {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .35rem .4rem .35rem .9rem; border-radius: 999px;
+  border: 2px solid var(--accent); background: var(--paper);
+}
+.chip strong { font-variant-numeric: tabular-nums; font-size: 1.2rem; min-width: 4.2ch; }
+.chip small { color: var(--muted); max-width: 16ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip button { min-width: 40px; min-height: 40px; border-radius: 50%; border: 0; background: var(--accent-soft); cursor: pointer; font-weight: 700; }
+.chip[data-state="paused"] { border-style: dashed; }
+.chip[data-state="done"] { border-color: var(--ok); background: var(--ok); color: #fff; animation: ring 1s ease-in-out infinite; }
+.chip[data-state="done"] small { color: #fff; }
+.chip[data-state="done"] button { background: rgba(255,255,255,.25); color: #fff; }
+/* Glow instead of scale: the Dismiss button must not move while someone taps it. */
+@keyframes ring { 50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--ok) 35%, transparent); } }
+
+.empty { max-width: 40rem; padding: clamp(1.5rem, 6vw, 4rem); }
+.empty h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.2; }
+
+@media (max-width: 760px) {
+  /* rows: collapsed ingredients take only their own height, the step gets the rest */
+  .cook-body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .ingredients { border-right: 0; border-bottom: 1px solid var(--line); }
+  .step { margin: 1.5rem 0; }
+  .nav .btn { flex: 1 1 8rem; }
+  .keys { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .progress > span { transition: none; }
+  .chip[data-state="done"] { animation: none; }
+}
+@media print { .tray, .nav, .wake, .servings button { display: none; } }
+
+/* ================= Email a Recipe ================= */
+
+.composer { max-width: 72rem; margin: 0 auto; padding: clamp(1rem, 4vw, 2.5rem); }
+.composer > header h1 { margin: 0 0 .35rem; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.2; }
+.composer > header p { margin: 0; color: var(--muted); max-width: 60ch; }
+.compose-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.5rem); margin-top: 1.75rem; }
+.field { margin-bottom: 1.1rem; }
+.field label, .field legend { display: block; font-weight: 700; margin-bottom: .3rem; }
+.field .help { display: block; color: var(--muted); font-size: .92rem; margin: -.15rem 0 .35rem; }
+.field input[type="text"], .field input[type="number"], .field select, .field textarea {
+  width: 100%; min-height: 44px; padding: .55rem .7rem;
+  border: 2px solid var(--line); border-radius: var(--radius-s); background: var(--surface);
+}
+.field textarea { min-height: 9rem; resize: vertical; line-height: 1.45; }
+.field [aria-invalid="true"] { border-color: var(--bad); }
+.row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.check { display: flex; align-items: center; gap: .6rem; min-height: 44px; font-weight: 700; cursor: pointer; }
+.check input { width: 1.3rem; height: 1.3rem; accent-color: var(--accent); }
+.err { color: var(--bad); font-size: .95rem; margin: .3rem 0 0; }
+.err:empty { display: none; }
+
+.preview { position: sticky; top: 1rem; align-self: start; }
+.preview h2 { font-size: 1.15rem; margin: 0 0 .5rem; }
+.letter {
+  border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--surface);
+  overflow: hidden;
+}
+.letter dl { margin: 0; padding: .75rem 1rem; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: auto 1fr; gap: .2rem .75rem; font-size: .95rem; }
+.letter dt { color: var(--muted); }
+.letter dd { margin: 0; overflow-wrap: anywhere; }
+.letter pre {
+  margin: 0; padding: 1rem; white-space: pre-wrap; overflow-wrap: anywhere;
+  font-family: var(--font); font-size: .98rem; line-height: 1.5; max-height: 26rem; overflow-y: auto;
+}
+.status { margin: 1rem 0; padding: .75rem 1rem; border-radius: var(--radius-s); border-left: 4px solid var(--ok); background: var(--surface); }
+.status[data-kind="bad"] { border-color: var(--bad); background: var(--bad-soft); }
+.status[data-kind="warn"] { border-color: var(--warn); background: var(--warn-soft); }
+.status ul { margin: .35rem 0 0; padding-left: 1.2rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.privacy { color: var(--muted); font-size: .92rem; margin-top: 1rem; }
+.toast {
+  position: fixed; left: 50%; bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  background: var(--ink); color: var(--paper); padding: .7rem 1.2rem; border-radius: var(--radius-s); font-weight: 700;
+}
+@media (max-width: 860px) {
+  .compose-grid { grid-template-columns: 1fr; }
+  .preview { position: static; }
+}
+@media (max-width: 480px) { .row { grid-template-columns: 1fr 1fr; } .row .field:first-child { grid-column: 1 / -1; } }
+
+/* Addresses and the email text must show every character as typed: some fonts' contextual
+   alternates draw "7x2" as "7×2", which would make the inbox address wrong if copied by hand. */
+#to, #pvTo, .letter pre { font-variant-ligatures: none; font-feature-settings: "calt" 0, "liga" 0; }
+.field textarea#note { min-height: 4.5rem; }

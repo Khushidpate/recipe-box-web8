@@ -1,0 +1,128 @@
+[
+ {
+  "id": "C1",
+  "check": "Inbox address filled in from the link",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C1",
+  "check": "Address removed from the address bar after reading",
+  "pass": true,
+  "detail": "http://localhost:8765/email-composer.html"
+ },
+ {
+  "id": "C2",
+  "check": "No error messages before the cook types",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C2",
+  "check": "Selecting send on an empty form shows the 6 field errors",
+  "pass": true,
+  "detail": "shown=6"
+ },
+ {
+  "id": "C2",
+  "check": "Focus moves to the first problem (recipe name)",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C2",
+  "check": "Send link stays disabled",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C2",
+  "check": "Error text matches the app",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C3",
+  "check": "Preview matches the template Scenario A expects",
+  "pass": true,
+  "detail": "Category: dinner\nTime: 15 mins   Serves: 2   Vegetarian: yes\nIngredients:\n- 2 cups cooked rice (day-old is best)\n- 2 egg"
+ },
+ {
+  "id": "C3",
+  "check": "Status says ready, no warnings",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C3",
+  "check": "mailto link: right inbox, subject and body",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C4",
+  "check": "Vegetarian conflict is a warning naming the ingredient",
+  "pass": true,
+  "detail": "Ready to send. Please check:\nMarked vegetarian, but \u201cfish sauce\u201d is not vegetarian. The reviewer will check this."
+ },
+ {
+  "id": "C5",
+  "check": "Phone number triggers a privacy warning",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C6",
+  "check": "A personal address is refused as the inbox",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C7",
+  "check": "Long recipe: send link disabled with an explanation",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C7",
+  "check": "Copy email text puts the full body on the clipboard",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C8",
+  "check": "Draft is kept after a reload",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C8",
+  "check": "Inbox address survives a reload in the same tab",
+  "pass": true,
+  "detail": "rb7x2k9q@hook.us2.make.com"
+ },
+ {
+  "id": "C8",
+  "check": "Start a new recipe clears the form, keeps the inbox",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "C9",
+  "check": "theme=dark uses the app's dark fill",
+  "pass": true,
+  "detail": "rgb(28, 25, 23)"
+ },
+ {
+  "id": "C9",
+  "check": "No sideways scrolling at 390 px",
+  "pass": true,
+  "detail": "scrollWidth=390"
+ },
+ {
+  "id": "C10",
+  "check": "No JavaScript or CSP errors in the console",
+  "pass": true,
+  "detail": ""
+ }
+]

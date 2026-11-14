@@ -1,0 +1,146 @@
+[
+ {
+  "id": "E1",
+  "check": "No recipe in the link shows the help screen",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E1",
+  "check": "Sample recipe link opens Cook Mode",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E2",
+  "check": "Title with & renders correctly",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E2",
+  "check": "Step 1 shown with progress",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E2",
+  "check": "HTML inside step text is shown as text, not run",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E3",
+  "check": "2 servings: 4 eggs, 1/4 cup",
+  "pass": true,
+  "detail": "['4 eggs', '1/4 cup grated cheese', '2 tbsp chopped soft herbs', '1 tbsp butter', 'salt and pepper']"
+ },
+ {
+  "id": "E3",
+  "check": "4 servings: 8 eggs, 1/2 cup, untouched 'salt and pepper'",
+  "pass": true,
+  "detail": "['8 eggs', '1/2 cup grated cheese', '4 tbsp chopped soft herbs', '2 tbsp butter', 'salt and pepper']"
+ },
+ {
+  "id": "E3",
+  "check": "5 servings: 1/4 cup x 2.5 -> 0.6 (FormatQty rounding)",
+  "pass": true,
+  "detail": "0.6 cup grated cheese"
+ },
+ {
+  "id": "E4",
+  "check": "Step 2 shows a timer button for '3 minutes'",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E4",
+  "check": "Timer chip appears at 3:00",
+  "pass": true,
+  "detail": "3:00"
+ },
+ {
+  "id": "E4",
+  "check": "After 61 s the timer shows 1:59",
+  "pass": true,
+  "detail": "1:59"
+ },
+ {
+  "id": "E4",
+  "check": "Paused timer does not move",
+  "pass": true,
+  "detail": "1:59"
+ },
+ {
+  "id": "E4",
+  "check": "Timer keeps running on the next step",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E4",
+  "check": "Timer finishes: chip says Done, tab title shows alarm",
+  "pass": true,
+  "detail": "\u23f0 Time\u2019s up \u2013 Herb & Cheese Skillet Eggs \u2013 Cook Mode"
+ },
+ {
+  "id": "E4",
+  "check": "Dismissed timer disappears and the title resets",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E5",
+  "check": "Finish shows the done screen",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E5",
+  "check": "Start over returns to step 1",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E6",
+  "check": "Reload keeps the step and ticked ingredients",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E7",
+  "check": "Damaged link explains what to do",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E7",
+  "check": "Recipe without steps explains what to do",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E8",
+  "check": "dark=true uses the app's dark fill RGBA(28,25,23)",
+  "pass": true,
+  "detail": "rgb(28, 25, 23)"
+ },
+ {
+  "id": "E9",
+  "check": "No sideways scrolling at 390 px",
+  "pass": true,
+  "detail": "scrollWidth=390"
+ },
+ {
+  "id": "E9",
+  "check": "Ingredients collapse on a phone",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "id": "E10",
+  "check": "No JavaScript or CSP errors in the console",
+  "pass": true,
+  "detail": ""
+ }
+]

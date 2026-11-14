@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Email a recipe – The Recipe Box</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%89%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="css/rb-web.css">
+</head>
+<body>
+<div class="composer">
+  <header>
+    <h1>Email a recipe</h1>
+    <p>Fill in your recipe and send it from the address you sign in with. It arrives in the app as your private draft, ready to check and submit for review.</p>
+  </header>
+
+  <div class="compose-grid">
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="title">Recipe name</label>
+        <input type="text" id="title" maxlength="140" autocomplete="off" aria-describedby="title-err">
+        <p class="err" id="title-err"></p>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" aria-describedby="category-err">
+            <option value="">Choose…</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="dinner">Dinner</option>
+            <option value="dessert">Dessert</option>
+          </select>
+          <p class="err" id="category-err"></p>
+        </div>
+        <div class="field">
+          <label for="minutes">Minutes</label>
+          <input type="number" id="minutes" inputmode="numeric" min="1" max="1440" step="1" aria-describedby="minutes-err">
+          <p class="err" id="minutes-err"></p>
+        </div>
+        <div class="field">
+          <label for="servings">Serves</label>
+          <input type="number" id="servings" inputmode="numeric" min="1" max="50" step="1" aria-describedby="servings-err">
+          <p class="err" id="servings-err"></p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="check"><input type="checkbox" id="isVeg"> Vegetarian</label>
+      </div>
+
+      <div class="field">
+        <label for="ingredients">Ingredients</label>
+        <span class="help" id="ingredients-help">One per line, amount first: “1 1/2 cups rice”.</span>
+        <textarea id="ingredients" aria-describedby="ingredients-help ingredients-err"></textarea>
+        <p class="err" id="ingredients-err"></p>
+      </div>
+
+      <div class="field">
+        <label for="steps">Steps</label>
+        <span class="help" id="steps-help">One step per line, in order. Times like “cook for 3 minutes” become timers in Cook Mode.</span>
+        <textarea id="steps" aria-describedby="steps-help steps-err"></textarea>
+        <p class="err" id="steps-err"></p>
+      </div>
+
+      <div class="field">
+        <label for="note">Note for the reviewer (optional)</label>
+        <textarea id="note" rows="2" maxlength="500"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="to">Recipe inbox</label>
+        <span class="help" id="to-help">Filled in when you open this page from the app.</span>
+        <input type="text" id="to" autocomplete="off" spellcheck="false" aria-describedby="to-help to-err">
+        <p class="err" id="to-err"></p>
+      </div>
+    </form>
+
+    <aside class="preview" aria-labelledby="preview-h">
+      <h2 id="preview-h">Your email</h2>
+      <div class="letter">
+        <dl>
+          <dt>To</dt><dd id="pvTo"></dd>
+          <dt>Subject</dt><dd id="pvSubject"></dd>
+        </dl>
+        <pre id="pvBody"></pre>
+      </div>
+
+      <div class="status" id="status" aria-live="polite"></div>
+
+      <div class="actions">
+        <a class="btn btn-primary" id="send" href="#" role="button">Open in my email app</a>
+        <button class="btn" id="copy" type="button">Copy email text</button>
+        <button class="btn btn-quiet" id="clear" type="button">Start a new recipe</button>
+      </div>
+      <p class="privacy">Only the text of your email is sent to Google Gemini to read the recipe, so leave out personal details. Nothing is published until a reviewer approves it.</p>
+    </aside>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="js/rb-common.js"></script>
+<script src="js/email-composer.js"></script>
+</body>
+</html>
